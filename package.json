@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "dotenv": "^0.2.8",
     "express": "3.x",
     "unirest": "^0.2.7"
   }
