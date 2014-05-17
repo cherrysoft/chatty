@@ -1,9 +1,9 @@
+.env
 # Logs
 logs
 *.log
 
 CHANGELOG
-.env
 
 # Runtime data
 pids
