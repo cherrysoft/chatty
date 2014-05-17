@@ -1,6 +1,9 @@
 var express = require('express'),
     app = express(),
-    unirest = require('unirest');
+    unirest = require('unirest'),
+    dotenv = require('dotenv');
+
+dotenv.load();
 
 app.use(express.bodyParser());
 app.use(express.static(__dirname + '/public'));
