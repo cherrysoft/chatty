@@ -13,9 +13,6 @@ app.use(express.static(__dirname + '/public'));
 app.post('/say/something', function(req, res) {
   var something = req.body.say;
 
-  console.log(mashapeTestingKey);
-
-
   var input = 'https://jeannie.p.mashape.com/text/?input=' + something + '&locale=en&location=50.3%2C9.0&clientFeatures=all&timeZone=%2B120&out=simple%2Fjson';
 
   var Request = unirest.get(input)
