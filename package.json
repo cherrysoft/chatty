@@ -1,0 +1,10 @@
+{
+  "name": "Chatty",
+  "description": "A TTY to Chat",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "unirest": "^0.2.7"
+  }
+}

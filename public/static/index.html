@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Terminal Emulator</title>
+    <meta name="author" content="Jakub Jankiewicz - jcubic&#64;onet.pl"/>
+    <meta name="Description" content="Demonstration for JQuery Terminal Emulator using call automaticly JSON-RPC service (in php) with authentication."/>
+    <link rel="sitemap" type="application/xml" title="Sitemap" href=""/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script src="../js/jquery-1.7.1.min.js"></script>
+    <script src="../js/jquery.mousewheel-min.js"></script>
+    <script src="../js/jquery.terminal-min.js"></script>
+    <link href="../css/jquery.terminal.css" rel="stylesheet"/>
+    
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=VT323">
+    <style>
+      .logo {
+        font-family: 'VT323', serif;
+        font-size: 18px;
+        padding-top: 10px;
+        padding-bottom: 22px;
+        color: green;
+      }
+    </style>    
+  </head>
+<body>
+
+<div class="logo">your logo goes here or not</div>
+
+<script>
+jQuery(document).ready(function($) {
+    var id = 1;
+    $('body').terminal(function(command, term) {
+        if (command == 'help') {
+            term.echo("available commands are contact, wink, chat, clear");
+        } else if (command == 'contact'){
+            term.push(function(command, term) {
+                if (command == 'help') {
+                    term.echo('available commands are email, phone, mobile, skype');
+                } else if (command == 'email') {
+                    term.echo('you@youremail.com');
+                } else if (command == 'phone') {
+                    term.echo('+353 01 010101010');
+                } else if (command == 'mobile') {
+                    term.echo('+353 01 010101010');
+                } else if (command == 'skype') {
+                    term.echo('hello.you');
+                } else {
+                    term.echo('unknown command ' + command + ', try typing help');
+                }
+            }, {
+                prompt: 'contact> ',
+                name: 'test'});
+        } else if (command == "wink") {
+			term.echo(';)');
+        } else if (command == 'chat'){
+            term.push(function(command, term) {
+                if (command == 'help') {
+                    term.echo('say something');
+                } else {
+					var data = { say: command };
+
+					$.ajax({
+						url: "/say/something",
+						type: "POST",
+						dataType: "json",
+						data: data,						
+						cache: false,
+						timeout: 8000,
+
+						complete: function(data) {
+
+						},
+						success: function(data, textStatus, jqXHRs) {			  
+						  term.echo(data.output[0].actions.say.text);						  
+					    },
+					    error: function(jqXHR, textStatus, errorThrown) {
+						  term.echo('oops!, an error occurred:' + errorThrown);
+					    },
+					});                    
+                }
+            }, {
+                prompt: 'chat> ',
+                name: 'test'});
+        } else {
+            term.echo("unknown command " + command);
+        }
+    }, {
+        greetings: "type help to see available commands",
+        onBlur: function() {
+            // prevent loosing focus
+            return false;
+        }
+    });
+});
+
+</script>
+</body>
