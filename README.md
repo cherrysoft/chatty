@@ -1,4 +1,6 @@
 chatty
 ======
 
-A jQuery terminal running in Express with Chatbot integration
+A jQuery terminal using the superb [jQuery Terminal](http://terminal.jcubic.pl/) running on Express with Jeannie Chatbot integration.
+
+Enjoy!!!
